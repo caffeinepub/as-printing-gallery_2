@@ -10,27 +10,23 @@ import {
 } from "@/components/ui/select";
 import { Toaster } from "@/components/ui/sonner";
 import { Textarea } from "@/components/ui/textarea";
-import {
-  Download,
-  Loader2,
-  Mail,
-  MapPin,
-  Menu,
-  Phone,
-  Printer,
-  X,
-} from "lucide-react";
+import { Download, Loader2, MapPin, Menu, Phone, X } from "lucide-react";
 import { motion } from "motion/react";
 import { useState } from "react";
 import { toast } from "sonner";
 import { useSubmitQuoteRequest } from "./hooks/useQueries";
+
+const LOGO_SRC =
+  "/assets/img_20260223_145402_809-019d48b5-5f87-706b-881a-b7b3e5453a20.webp";
+const OWNER_NAME = "Pro Abhishek Sharma";
+const OWNER_PHONE = "8542919199";
 
 const PRODUCTS = [
   {
     name: "Mug Printing",
     description:
       "Custom ceramic mugs with your design. Perfect for gifts, promotions, and school events.",
-    priceText: "From ₱99",
+    priceText: "Contact for Price",
     image: "/assets/generated/mug-printing.dim_400x300.jpg",
     category: "Merchandise",
   },
@@ -38,7 +34,7 @@ const PRODUCTS = [
     name: "School Uniform Printing",
     description:
       "Embroidered and printed school uniforms with custom logos and school names.",
-    priceText: "From ₱299",
+    priceText: "Contact for Price",
     image: "/assets/generated/uniform-printing.dim_400x300.jpg",
     category: "School",
   },
@@ -46,7 +42,7 @@ const PRODUCTS = [
     name: "School Pen Printing",
     description:
       "Branded pens for schools and organizations with custom text and logos.",
-    priceText: "From ₱15",
+    priceText: "Contact for Price",
     image: "/assets/generated/pen-printing.dim_400x300.jpg",
     category: "School",
   },
@@ -54,7 +50,7 @@ const PRODUCTS = [
     name: "School ID Card Printing",
     description:
       "Professional laminated ID cards for students, staff, and organizations.",
-    priceText: "From ₱49",
+    priceText: "Contact for Price",
     image: "/assets/generated/id-card-printing.dim_400x300.jpg",
     category: "School",
   },
@@ -62,7 +58,7 @@ const PRODUCTS = [
     name: "T-Shirt Printing",
     description:
       "Full color sublimation and screen printing on t-shirts for any occasion.",
-    priceText: "From ₱199",
+    priceText: "Contact for Price",
     image: "/assets/generated/tshirt-printing.dim_400x300.jpg",
     category: "Apparel",
   },
@@ -70,7 +66,7 @@ const PRODUCTS = [
     name: "Custom Printing",
     description:
       "Business cards, flyers, brochures, and any custom print materials.",
-    priceText: "From ₱29",
+    priceText: "Contact for Price",
     image: "/assets/generated/custom-printing.dim_400x300.jpg",
     category: "Marketing",
   },
@@ -78,7 +74,7 @@ const PRODUCTS = [
     name: "Tote Bag Printing",
     description:
       "Branded eco-friendly tote bags with custom full-color printing.",
-    priceText: "From ₱149",
+    priceText: "Contact for Price",
     image: "/assets/generated/tote-printing.dim_400x300.jpg",
     category: "Merchandise",
   },
@@ -86,9 +82,49 @@ const PRODUCTS = [
     name: "Awards & Frames",
     description:
       "Custom plaques, trophies, certificates and frames for school events.",
-    priceText: "From ₱249",
+    priceText: "Contact for Price",
     image: "/assets/generated/award-printing.dim_400x300.jpg",
     category: "Awards",
+  },
+  {
+    name: "Cushion / Pillow Cover",
+    description:
+      "Custom printed cushion and pillow covers with vibrant designs. Perfect for home decor and gifting.",
+    priceText: "Contact for Price",
+    image: "/assets/generated/cushion-cover.dim_400x300.jpg",
+    category: "Home Decor",
+  },
+  {
+    name: "Mobile Cover Printing",
+    description:
+      "Custom printed mobile phone covers with your design, photo, or logo.",
+    priceText: "Contact for Price",
+    image: "/assets/generated/mobile-cover.dim_400x300.jpg",
+    category: "Merchandise",
+  },
+  {
+    name: "Custom Designing",
+    description:
+      "Professional graphic design services for your print products, logos, banners, and more.",
+    priceText: "Contact for Price",
+    image: "/assets/generated/custom-design.dim_400x300.jpg",
+    category: "Services",
+  },
+  {
+    name: "Photo / Picture Printing",
+    description:
+      "High quality photo and picture printing on various materials and sizes.",
+    priceText: "Contact for Price",
+    image: "/assets/generated/photo-printing.dim_400x300.jpg",
+    category: "Photography",
+  },
+  {
+    name: "Mouse Pad Printing",
+    description:
+      "Custom printed mouse pads with your design, logo, or photo. Great for offices and gaming setups.",
+    priceText: "Contact for Price",
+    image: "/assets/generated/mousepad-printing.dim_400x300.jpg",
+    category: "Merchandise",
   },
 ];
 
@@ -106,12 +142,11 @@ function NavBar({ onQuoteClick }: { onQuoteClick: () => void }) {
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
           <div className="flex items-center gap-3">
-            <div
-              className="w-10 h-10 rounded-lg flex items-center justify-center"
-              style={{ backgroundColor: "#0B2F4A" }}
-            >
-              <Printer className="w-5 h-5 text-white" />
-            </div>
+            <img
+              src={LOGO_SRC}
+              alt="AS-Printing Gallery"
+              className="h-10 w-10 rounded-full object-cover"
+            />
             <div className="leading-tight">
               <div className="font-bold text-sm" style={{ color: "#0B2F4A" }}>
                 AS-Printing
@@ -250,9 +285,15 @@ function HeroSection({
             Premium Quality <br />
             <span style={{ color: "#F28C28" }}>Printing Solutions</span>
           </h1>
-          <p className="text-gray-200 text-lg mb-8 leading-relaxed">
+          <p className="text-gray-200 text-lg mb-2 leading-relaxed">
             Mugs, school uniforms, ID cards, pens, t-shirts and more. Custom
             printing for schools, businesses, and events.
+          </p>
+          <p className="text-gray-300 text-sm mb-8">
+            Contact:{" "}
+            <span className="font-semibold text-white">{OWNER_NAME}</span>{" "}
+            &bull;{" "}
+            <span className="font-semibold text-white">{OWNER_PHONE}</span>
           </p>
           <div className="flex flex-wrap gap-3">
             <Button
@@ -310,12 +351,6 @@ function ProductCard({
           <h3 className="font-semibold text-sm" style={{ color: "#1B1F23" }}>
             {product.name}
           </h3>
-          <span
-            className="text-xs font-bold px-2 py-0.5 rounded-full whitespace-nowrap ml-2"
-            style={{ backgroundColor: "#FEF3E2", color: "#F28C28" }}
-          >
-            {product.priceText}
-          </span>
         </div>
         <p
           className="text-xs leading-relaxed flex-1 mb-3"
@@ -374,35 +409,16 @@ function PrintCatalog() {
               style={{ width: "100%", height: "160px", objectFit: "cover" }}
             />
             <div style={{ padding: "16px" }}>
-              <div
+              <h3
                 style={{
-                  display: "flex",
-                  justifyContent: "space-between",
-                  alignItems: "flex-start",
+                  fontWeight: "600",
+                  fontSize: "14px",
+                  color: "#1B1F23",
+                  margin: 0,
                 }}
               >
-                <h3
-                  style={{
-                    fontWeight: "600",
-                    fontSize: "14px",
-                    color: "#1B1F23",
-                    margin: 0,
-                  }}
-                >
-                  {product.name}
-                </h3>
-                <span
-                  style={{
-                    fontSize: "12px",
-                    fontWeight: "700",
-                    color: "#F28C28",
-                    whiteSpace: "nowrap",
-                    marginLeft: "8px",
-                  }}
-                >
-                  {product.priceText}
-                </span>
-              </div>
+                {product.name}
+              </h3>
               <p
                 style={{
                   fontSize: "12px",
@@ -419,8 +435,7 @@ function PrintCatalog() {
       </div>
       <div className="mt-8 text-center text-xs" style={{ color: "#6B7280" }}>
         <p>
-          Contact us: info@asprinting.com | +63 912 345 6789 | Quezon City,
-          Philippines
+          {OWNER_NAME} | {OWNER_PHONE}
         </p>
         <p style={{ marginTop: "4px" }}>
           AS-Printing Gallery — All rights reserved
@@ -532,7 +547,7 @@ function ContactSection() {
                 <Input
                   id="name"
                   data-ocid="contact.name.input"
-                  placeholder="Juan dela Cruz"
+                  placeholder="Your Name"
                   value={form.name}
                   onChange={(e) =>
                     setForm((p) => ({ ...p, name: e.target.value }))
@@ -552,7 +567,7 @@ function ContactSection() {
                   id="email"
                   type="email"
                   data-ocid="contact.email.input"
-                  placeholder="juan@email.com"
+                  placeholder="your@email.com"
                   value={form.email}
                   onChange={(e) =>
                     setForm((p) => ({ ...p, email: e.target.value }))
@@ -574,7 +589,7 @@ function ContactSection() {
                 <Input
                   id="phone"
                   data-ocid="contact.phone.input"
-                  placeholder="+63 912 345 6789"
+                  placeholder="Your phone number"
                   value={form.phone}
                   onChange={(e) =>
                     setForm((p) => ({ ...p, phone: e.target.value }))
@@ -670,20 +685,18 @@ function Footer() {
           {/* Brand */}
           <div>
             <div className="flex items-center gap-2 mb-3">
-              <div
-                className="w-9 h-9 rounded-lg flex items-center justify-center"
-                style={{ backgroundColor: "#F28C28" }}
-              >
-                <Printer className="w-5 h-5 text-white" />
-              </div>
+              <img
+                src={LOGO_SRC}
+                alt="AS-Printing Gallery"
+                className="w-9 h-9 rounded-full object-cover"
+              />
               <div>
                 <div className="font-bold text-white">AS-Printing Gallery</div>
               </div>
             </div>
             <p className="text-sm leading-relaxed" style={{ color: "#94A3B8" }}>
               Your trusted partner for high-quality custom printing services.
-              Serving schools, businesses, and organizations across the
-              Philippines.
+              Serving schools, businesses, and organizations.
             </p>
           </div>
 
@@ -715,14 +728,10 @@ function Footer() {
             <h4 className="font-semibold text-white mb-3">Contact Info</h4>
             <div className="space-y-2">
               <div
-                className="flex items-center gap-2 text-sm"
-                style={{ color: "#94A3B8" }}
+                className="flex items-center gap-2 text-sm font-semibold"
+                style={{ color: "#F28C28" }}
               >
-                <Mail
-                  className="w-4 h-4 flex-shrink-0"
-                  style={{ color: "#F28C28" }}
-                />
-                <span>info@asprinting.com</span>
+                {OWNER_NAME}
               </div>
               <div
                 className="flex items-center gap-2 text-sm"
@@ -732,7 +741,7 @@ function Footer() {
                   className="w-4 h-4 flex-shrink-0"
                   style={{ color: "#F28C28" }}
                 />
-                <span>+63 912 345 6789</span>
+                <span>{OWNER_PHONE}</span>
               </div>
               <div
                 className="flex items-start gap-2 text-sm"
@@ -742,7 +751,7 @@ function Footer() {
                   className="w-4 h-4 flex-shrink-0 mt-0.5"
                   style={{ color: "#F28C28" }}
                 />
-                <span>123 Printing Ave, Quezon City, Philippines</span>
+                <span>Contact for location</span>
               </div>
             </div>
           </div>
